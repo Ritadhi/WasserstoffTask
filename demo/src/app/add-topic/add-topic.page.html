@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> <!-- see how there are no complicated things here -->
+    </ion-buttons>
+    <ion-title>Add Topic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="margin: 25px; height: fit-content; width: 100%;" *ngIf="errorMessage">
+    <div style="color: red;">
+      Not a valid user
+    </div>
+  </div>
+  <ion-item>
+    <ion-label position="floating">Topic</ion-label>
+    <ion-input [(ngModel)]="topic" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea [(ngModel)]="content" (ngModelChange)=onChangeModel($event)></ion-textarea>
+  </ion-item>
+  <br>
+  <div>
+    <div *ngFor="let level of levels;" (click)=setColor(level.color,level.value) [ngStyle]="{'background': level.color}"
+      [class.active]="color == level.color" style="color: white; width: 80%; margin-left: 25px; margin: 10px">
+      {{level.name}}</div>
+  </div>
+  <div class="mt-5" *ngIf="output">
+    <span *ngFor="let out of output; let i = index;" [ngStyle]="{'color': out.color}"
+      (click)="set(i)"><b [innerHTML]='delimeterColor(out.out)'></b></span>
+  </div>
+  <div style="text-align: end;">
+    <ion-button size="small" [disabled]="!output || !topic" (click)=goToAddTopic()>Add Topic</ion-button>
+  </div>
+</ion-content>

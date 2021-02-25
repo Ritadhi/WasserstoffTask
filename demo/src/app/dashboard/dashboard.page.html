@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="text-align: center;">
+    <ion-button size="small" (click)=goToAddTopic()>Add Topic</ion-button>
+  </div>
+  <div style="margin: 25px; height: fit-content; width: 100%;" *ngIf="topic.length>0">
+    <div *ngFor="let top of topic; let i = index;">
+      {{top[0]}} : {{top[1]}}%
+    </div>
+  </div>
+  <div style="margin: 25px; height: fit-content; width: 100%;" *ngIf="topic.length==0">
+    <div>
+      No Topic Present
+    </div>
+  </div>
+  <div style="margin: 25px; height: fit-content; width: 100%;" *ngIf="errorMessage">
+    <div style="color: red;">
+      Not a valid user
+    </div>
+  </div>
+</ion-content>
